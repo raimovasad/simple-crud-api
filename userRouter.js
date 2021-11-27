@@ -4,11 +4,12 @@ const router = new Router()
 
 const users = [];
 
-router.get('/users',(req,res)=>{
+router.get('/person',(req,res)=>{
+    res.statusCode = 200;
     res.send(users);
 })
 
-router.get('/users/:id',(req,res)=>{
+router.get('/person/:id',(req,res)=>{
     const valid = req.params.id.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
     if(!valid){
     res.statusCode = 400;
@@ -26,7 +27,7 @@ router.get('/users/:id',(req,res)=>{
    
 })
 
-router.post('/users',(req,res)=>{
+router.post('/person',(req,res)=>{
     const {name,age,hobbies} = req.body
     if(!name || !age || !hobbies){
         res.statusCode = 400
@@ -44,7 +45,7 @@ router.post('/users',(req,res)=>{
         res.send(user);
     }
 })
-router.delete('/users/:id',(req,res)=>{
+router.delete('/person/:id',(req,res)=>{
     const valid = req.params.id.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
     if(!valid){
      res.statusCode = 400;
@@ -63,7 +64,7 @@ router.delete('/users/:id',(req,res)=>{
     }
 })
 
-router.put('/users/:id',(req,res)=>{
+router.put('/person/:id',(req,res)=>{
     const valid = req.params.id.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
     if(!valid){
      res.statusCode = 400;

@@ -24,7 +24,8 @@ class App{
                 this.middlewares.forEach(midd => midd(req,res))
                 const emitted = this.emitter.emit(this._getMask(req.path,req.method),req,res)
                 if(!emitted){
-                    res.end()
+                    res.statusCode=404
+                    res.end('Non existing page!')
                 }
             })
            
