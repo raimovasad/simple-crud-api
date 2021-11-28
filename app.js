@@ -28,7 +28,13 @@ class App{
                         }
                        
                     }
-                        this.middlewares.forEach(midd => midd(req,res))
+                        try{
+                            this.middlewares.forEach(midd => midd(req,res))
+                        }
+                        catch(e){
+                            res.statusCode=400;
+                            return res.end(`${e.message}`)
+                        }
                         
                     const emitted = this.emitter.emit(this._getMask(req.path,req.method),req,res)
                     if(!emitted){

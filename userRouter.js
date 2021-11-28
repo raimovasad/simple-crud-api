@@ -42,15 +42,22 @@ router.post('/person',(req,res)=>{
        return res.send({message:'Please send required fields!'})
     }
     else{
-        const user = {
-            id: uuid(),
-            name,
-            age,
-            hobbies 
+        if(hobbies instanceof Array){
+            const user = {
+                id: uuid(),
+                name,
+                age,
+                hobbies 
+            }
+            users.push(user)
+            res.statusCode = 201
+            res.send(user);
         }
-        users.push(user)
-        res.statusCode = 201
-        res.send(user);
+        else{
+            res.statusCode = 400
+        return res.send({message:'Hobbies should be array!'}) 
+        }
+       
     }
 })
 router.delete('/person/:id',(req,res)=>{
