@@ -17,17 +17,32 @@ class App{
             req.on('data',(chunk)=>{
                 body += chunk;
             })
-            req.on('end',()=>{
-                if(body){
-                    req.body = JSON.parse(body)
-                }
-                this.middlewares.forEach(midd => midd(req,res))
-                const emitted = this.emitter.emit(this._getMask(req.path,req.method),req,res)
-                if(!emitted){
-                    res.statusCode=404
-                    res.end('Non existing page!')
-                }
-            })
+            try{
+                req.on('end',()=>{
+                    if(body){
+                        try{
+                            req.body = JSON.parse(body)
+                        }
+                        catch(e){
+                            res.statusCode=400;
+                          return  res.end(`${e.message}`)
+                        }
+                       
+                    }
+                    this.middlewares.forEach(midd => midd(req,res))
+                    const emitted = this.emitter.emit(this._getMask(req.path,req.method),req,res)
+                    if(!emitted){
+                        res.statusCode=404
+                      return  res.end('Non existing page!')
+                    }
+                })
+            }
+            catch(e){
+                console.log('Asad');
+
+              
+            }
+         
            
         })
     }

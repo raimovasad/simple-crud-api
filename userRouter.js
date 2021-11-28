@@ -4,6 +4,13 @@ const router = new Router()
 
 const users = [];
 
+//router for cleaning database
+router.get('/clearperson',(req,res)=>{
+    users.splice(0,users.length)
+    res.send({message:'Database was cleaned'})
+})
+
+
 router.get('/person',(req,res)=>{
     res.statusCode = 200;
     res.send(users);
@@ -21,7 +28,7 @@ router.get('/person/:id',(req,res)=>{
     return res.send({message:'User is not found!'})
     }
     else{
-        res.statusCode = 201
+        res.statusCode = 200
         res.send(user);
     }
    
@@ -91,7 +98,7 @@ router.put('/person/:id',(req,res)=>{
       }
       users[index] = user
         res.statusCode = 200
-        res.send(users);
+        res.send(user);
     }
 })
 
