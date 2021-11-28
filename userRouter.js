@@ -42,7 +42,11 @@ router.post('/person',(req,res)=>{
        return res.send({message:'Please send required fields!'})
     }
     else{
-        if(hobbies instanceof Array){
+
+        if(!(typeof name == 'string') || !(typeof age == 'number') || !(hobbies instanceof Array)){
+            userValidator(res,name,age,hobbies)
+            return
+        }
             const user = {
                 id: uuid(),
                 name,
@@ -52,11 +56,7 @@ router.post('/person',(req,res)=>{
             users.push(user)
             res.statusCode = 201
             res.send(user);
-        }
-        else{
-            res.statusCode = 400
-        return res.send({message:'Hobbies should be array!'}) 
-        }
+        
        
     }
 })
@@ -97,17 +97,41 @@ router.put('/person/:id',(req,res)=>{
        return res.send({message:'Please send required fields!'})
     }
     else{
-      const index = users.findIndex(chel =>chel.id === req.params.id.toString())
-      const user = {
-          id:users[index].id,
-          name,
-          age,
-          hobbies
-      }
-      users[index] = user
-        res.statusCode = 200
-        res.send(user);
+        if(!(typeof name == 'string') || !(typeof age == 'number') || !(hobbies instanceof Array)){
+            userValidator(res,name,age,hobbies)
+            return
+        }
+            const index = users.findIndex(chel =>chel.id === req.params.id.toString())
+            const user = {
+                id:users[index].id,
+                name,
+                age,
+                hobbies
+            }
+            users[index] = user
+              res.statusCode = 200
+              res.send(user);
+         
+        
+     
     }
 })
+
+function userValidator(res,name,age,hobbies) { 
+    if(!(typeof name == 'string' )){
+        res.statusCode = 400
+        return res.send({message:'Name should be string!'}) 
+    }
+
+    if(!(typeof age == 'number')){
+        res.statusCode = 400
+        return res.send({message:'Age should be number!'})
+    }
+    if(!(hobbies instanceof Array)){
+        res.statusCode = 400
+        return res.send({message:'Hobbies should be array!'})      
+    }
+  
+ }
 
 export default router
