@@ -1,5 +1,5 @@
-const http = require('http');
-const Event = require('events');
+import http from 'http';
+import Event from 'events';
 
 
 
@@ -17,7 +17,6 @@ class App{
             req.on('data',(chunk)=>{
                 body += chunk;
             })
-            try{
                 req.on('end',()=>{
                     if(body){
                         try{
@@ -29,19 +28,15 @@ class App{
                         }
                        
                     }
-                    this.middlewares.forEach(midd => midd(req,res))
+                        this.middlewares.forEach(midd => midd(req,res))
+                        
                     const emitted = this.emitter.emit(this._getMask(req.path,req.method),req,res)
                     if(!emitted){
                         res.statusCode=404
                       return  res.end('Non existing page!')
                     }
                 })
-            }
-            catch(e){
-                console.log('Asad');
-
-              
-            }
+           
          
            
         })
@@ -69,4 +64,4 @@ class App{
     }
 }
 
-module.exports = App
+export default App

@@ -1,18 +1,21 @@
 {
   "name": "simple_crud_api",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "prod": "",
-    "build":"webpack"
+    "start:dev": "nodemon index.js",
+    "start:prod": "cross-env webpack && nodemon ./dist/bundle.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-loader": "^8.2.3",
     "cross-env": "^7.0.3",
+    "http-browserify": "^1.7.0",
     "jest": "^27.3.1",
     "nodemon": "^2.0.15",
     "supertest": "^6.1.6",

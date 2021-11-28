@@ -1,4 +1,4 @@
-module.exports=(localUrl)=>(req,res)=>{
+export default (localUrl)=>(req,res)=>{
     const parseurl = new URL(req.url,localUrl);
     const params ={}
     const id = parseurl.pathname.split('/').reverse()[0]

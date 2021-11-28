@@ -1,8 +1,9 @@
-const Router = require('./Router');
-const {v4:uuid} = require('uuid')
+import Router from './Router.js';
+import {v4 as uuid} from 'uuid';
+import {db} from './utils/db.js'
 const router = new Router()
 
-const users = [];
+const users = db || [];
 
 //router for cleaning database
 router.get('/clearperson',(req,res)=>{
@@ -102,4 +103,4 @@ router.put('/person/:id',(req,res)=>{
     }
 })
 
-module.exports = router
+export default router
