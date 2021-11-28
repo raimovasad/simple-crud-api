@@ -13,7 +13,8 @@ First of all, make sure that you entered the command **npm i** in order to insta
 ### For testing endpoints:
  1.  You should open a new console in your project after you run the project.
 
-    ![image](https://github.com/raimovasad/simple-crud-api/tree/rs-task-3/assets/Screenshot_1.png)
+ ![Screenshot_1](https://user-images.githubusercontent.com/88774509/143770359-380a2d15-2559-4a22-b675-b046acc78ca9.png)
+
 
  2.  Then in the new console write **npm run test**
 
