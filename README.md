@@ -21,7 +21,7 @@ First of all, make sure that you entered the command ` npm i ` in order to insta
  That's all...
 
 Endpoints:
-API path `/person`:
+1. API path `/person`:
     * **GET** `/person` or `/person/${personId}` should return all persons or person with corresponding `personId`
     * **POST** `/person` is used to create record about new person and store it in database
     * **PUT** `/person/${personId}` is used to update record about existing person
